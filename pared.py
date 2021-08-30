@@ -137,13 +137,18 @@ if __name__ == '__main__':
     print(max_date, max_patch_id)
 
     while True:
-        print(datetime.now().isoformat(), "- sleeping")
-        time.sleep(300)
         print(datetime.now().isoformat(), "- waking")
         url = PATCHWORK_INSTANCE + 'patches/?project=' + PROJECT + '&since=' + max_date + '&per_page=' + str(PER_PAGE)
         subject_map = update_subject_map(url, subject_map)
         subject_map = expire_subject_map(subject_map)
+
+        with open('subjects.json', 'w') as f:
+            json.dump(subject_map, f)
+
         for es in subject_map.values():
             max_patch_id = max([max_patch_id] + [e.id for e in es])
             max_date = max([max_date] + [e.date for e in es])
         print(max_date, max_patch_id)
+
+        print(datetime.now().isoformat(), "- sleeping")
+        time.sleep(300)
