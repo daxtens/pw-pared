@@ -11,7 +11,7 @@ PATCHWORK_INSTANCE = "https://patchwork.ozlabs.org/api/1.2/"
 PROJECT = 'patchwork'
 PER_PAGE = 100 # balance between not too many requests and not too big.
 MAX_FETCH_AGE_DAYS = 180 # only download N days worth of patches
-MAX_PATCH_AGE_DAYS = 90 # only consider patches sent in the last N days
+MAX_PATCH_AGE_DAYS = 180 # only consider patches sent in the last N days
 # if MAX_PATCH_AGE_DAYS > MAX_FETCH_AGE_DAYS, we will accumulate up to
 # MAX_PATCH_AGE_DAYS of data before starting to throw out data. This can
 # be handy to avoid overstressing the server... not that fetching pages of
