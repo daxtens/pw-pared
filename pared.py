@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 import requests
 from typing import NamedTuple, Dict, List, Union
 import json
