@@ -9,10 +9,10 @@ import sys
 import os
 
 API_TOKEN=os.environ.get("PW_API_KEY")
-PATCHWORK_INSTANCE = "https://patchwork.ozlabs.org/api/1.2/"
-PROJECT = 'patchwork'
+PATCHWORK_INSTANCE = os.environ.get("PW_API_URL", "https://patchwork.ozlabs.org/api/1.2/")
+PROJECT = os.environ.get("PW_PROJECT", 'patchwork')
 PER_PAGE = 100 # balance between not too many requests and not too big.
-MAX_FETCH_AGE_DAYS = 180 # only download N days worth of patches
+MAX_FETCH_AGE_DAYS = int(os.environ.get("PW_FETCH_DAYS", "180")) # only download N days worth of patches
 MAX_PATCH_AGE_DAYS = 180 # only consider patches sent in the last N days
 # if MAX_PATCH_AGE_DAYS > MAX_FETCH_AGE_DAYS, we will accumulate up to
 # MAX_PATCH_AGE_DAYS of data before starting to throw out data. This can
