@@ -116,7 +116,7 @@ def expire_subject_map(in_map: Dict[str, List[PatchNameOccurrence]]) -> Dict[str
             else:
                 print("Expiring all of", name)
 
-    return in_map
+    return new_map
 
 
 if __name__ == '__main__':
