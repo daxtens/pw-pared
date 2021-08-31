@@ -18,7 +18,7 @@ MAX_PATCH_AGE_DAYS = 180 # only consider patches sent in the last N days
 # MAX_PATCH_AGE_DAYS of data before starting to throw out data. This can
 # be handy to avoid overstressing the server... not that fetching pages of
 # patches is all that onerous.
-
+PARED_DATASTORE = os.environ.get("PARED_DATASTORE", "subjects.json")
 
 class PatchNameOccurrence(NamedTuple):
     id: int
@@ -121,12 +121,12 @@ def expire_subject_map(in_map: Dict[str, List[PatchNameOccurrence]]) -> Dict[str
 
 if __name__ == '__main__':
     try:
-        with open('subjects.json', 'r') as f:
+        with open(PARED_DATASTORE, 'r') as f:
             subject_map = json_to_pnos(json.load(f))
     except Exception as e:
         print(e)
         subject_map = generate_subject_map()
-        with open('subjects.json', 'w') as f:
+        with open(PARED_DATASTORE, 'w') as f:
             json.dump(subject_map, f)
 
     subject_map = expire_subject_map(subject_map)
@@ -144,7 +144,7 @@ if __name__ == '__main__':
         subject_map = update_subject_map(url, subject_map)
         subject_map = expire_subject_map(subject_map)
 
-        with open('subjects.json', 'w') as f:
+        with open(PARED_DATASTORE, 'w') as f:
             json.dump(subject_map, f)
 
         for es in subject_map.values():

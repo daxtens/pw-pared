@@ -27,3 +27,6 @@ Recognised variables and their defaults
 `PW_FETCH_DAYS` - when `subjects.json` doesn't exist, how many days of patches
 should we download to prime the database? Default is `180` which may be too big
 for noisy projects.
+
+`PARED_DATASTORE` - name to use instead of `subjects.json`, default is
+`subjects.json`. Handy for when you're managing multiple projects.
